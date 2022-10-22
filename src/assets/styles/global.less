@@ -1,0 +1,12 @@
+@primary-color: #0aa679; // 全局主色
+@gray-color: #b6b9b8; // 全局灰色
+@border-radius-base: 6px; // 组件/浮层圆角
+
+.text-overflow(@line: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line; /*超出几行后省略号*/
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}

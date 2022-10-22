@@ -6,6 +6,7 @@
  */
 import { Navigate } from 'react-router-dom'
 import PageNotFound from '@/pages/404'
+import Login from '@/pages/login'
 import { fillMenuRouter } from '@/layout/menu-instance'
 
 export interface IRoutes {
@@ -24,6 +25,13 @@ const routes: IRoutes[] = [
     layout: true,
     title: '驾驶舱',
     pageType: 'layoutPage',
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    layout: false,
+    title: '登录',
+    pageType: 'blankPage',
   },
   {
     path: '*',

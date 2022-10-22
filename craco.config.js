@@ -12,6 +12,22 @@ module.exports = {
   webpack: {
     alias: {
       '@': path.resolve(__dirname, 'src')
+    },
+    configure: (webpackConfig) => {
+      // webpackConfig webpack的默认配置文件
+
+      // style-resources-loader配置全局less
+      webpackConfig.module.rules.push({
+        test: /\.less$/,
+        use: [{
+          loader: 'style-resources-loader',
+          options: {
+            patterns: path.resolve(__dirname, './src/assets/styles/global.less'),
+            injector: 'append'
+          }
+        }]
+      })
+      return webpackConfig
     }
   },
   plugins: [
@@ -20,8 +36,8 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: themeColor,
-            javascriptEnabled: true
+            // modifyVars: themeColor,
+            javascriptEnabled: true,
           }
         }
       }
@@ -29,11 +45,11 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      "/shop-admin": {
-        target: 'http://localhost:3001',
+      "/": {
+        target: 'http://192.168.1.7:8081',
         changeOrigin: true,
         pathRewrite: {
-          "^/shop-admin": "/shop-admin"
+          "^/": "/"
         }
       },
     }

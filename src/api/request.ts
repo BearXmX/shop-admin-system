@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { message } from 'antd'
 
-const baseURL = 'http://localhost:3001/shop-admin'
+const baseURL = 'http://192.168.1.7:8081'
+
 const request = axios.create({
   baseURL,
   timeout: 20000,
@@ -8,19 +10,32 @@ const request = axios.create({
 
 request.interceptors.request.use(
   config => {
-    config.data = config.data ? JSON.stringify(config.data) : undefined
     return config
   },
   error => {
+    message.error(`请求错误`)
     Promise.reject(error)
   }
 )
 
 request.interceptors.response.use(
   res => {
-    return res.data
+    const quitLoginStatus = [500, 501, 502, 503]
+
+    const response = res.data as ResponseCommonDataType
+
+    if (response.status !== 200) {
+      message.error(response.message)
+      if (quitLoginStatus.includes(response.status as number)) {
+        window.localStorage.removeItem('currentUser')
+        window.location.href = `/login`
+      }
+    }
+
+    return response
   },
   error => {
+    message.error(`响应错误`)
     Promise.reject(error)
   }
 )

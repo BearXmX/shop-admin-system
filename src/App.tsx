@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import routes from '@/router'
 import BasicLayout from '@/layout'
 import type { IRoutes } from '@/router'
@@ -21,9 +21,9 @@ const App: React.FC = () => {
     )
   }
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>{getRoutes(routes)}</Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

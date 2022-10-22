@@ -6,11 +6,7 @@
  */
 import ShopEmpty from '@/components/empty'
 const CategoryList: React.FC = () => {
-  return (
-    <div className="shop-layout-content">
-      <ShopEmpty />
-    </div>
-  )
+  return <ShopEmpty />
 }
 
 export default CategoryList

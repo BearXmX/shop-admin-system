@@ -5,6 +5,7 @@ import SalesAnalysis from '@/pages/cockpit/sale-analysis'
 import UserAnalysis from '@/pages/cockpit/user-analysis'
 import CommodityList from '@/pages/commodity/commodity-list'
 import CommodityLabel from '@/pages/commodity/commodity-label'
+import UserList from '@/pages/account/user-list'
 import { IRoutes } from '@/router'
 
 export interface IMenus {
@@ -86,6 +87,23 @@ const MenuInstance: IMenus[] = [
         icon: <SvgIcon icon="icon-shangpinbiaoqianguanli" />,
         path: '/commodity/commodity-label',
         element: <CommodityLabel />,
+      },
+    ],
+  },
+  {
+    menus: 'sub-item',
+    label: '账户设置',
+    key: 'account-set',
+    icon: <SvgIcon icon="icon-yonghu" />,
+    children: [
+      {
+        menus: 'menu-item',
+        key: 'account-list',
+        label: '账户列表',
+        children: [],
+        icon: <SvgIcon icon="icon-wxbzhanghu" />,
+        path: '/account-set/account-list',
+        element: <UserList />,
       },
     ],
   },
