@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals'
 import '@/index.less'
 import { Provider } from 'react-redux'
 import store from './store'
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/es/locale/zh_CN'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -13,7 +15,9 @@ console.log(`%c${tips}`, 'color: #0aa679;font-size:12px;font-weight:bold')
 
 root.render(
   <Provider store={store}>
-    <App />
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
   </Provider>
 )
 

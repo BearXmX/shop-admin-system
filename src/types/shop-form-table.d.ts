@@ -19,4 +19,11 @@ declare type searchFormItemListProps = searchFormItemProps[]
 
 declare interface IShopFormTableProps {
   searchFormItemList: searchFormItemListProps | false
+  searchTableProps: {
+    dataSource: { [key: string]: any }[]
+    columns: any[]
+    total: number
+    loading: boolean
+  }
+  onSearch: (params: { page: number; pageSize: number }) => void
 }

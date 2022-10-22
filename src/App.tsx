@@ -20,6 +20,7 @@ const App: React.FC = () => {
       </>
     )
   }
+
   return (
     <HashRouter>
       <Routes>{getRoutes(routes)}</Routes>

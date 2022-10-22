@@ -10,3 +10,21 @@
   max-width: 100%;
   overflow: hidden;
 }
+
+.ant-pagination-item-active {
+  background-color: @primary-color;
+  a {
+    color: #fff;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 8px;
+  &::before {
+    display: none;
+  }
+}
