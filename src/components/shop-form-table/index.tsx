@@ -5,7 +5,7 @@ import { Button, Col, Form, Input, Row, Select, FormInstance, Space } from 'antd
 const Option = Select.Option
 
 const ShopFormTable: React.FC<IShopFormTableProps> = props => {
-  const [fold, setFold] = useState(false)
+  const [open, setOpen] = useState(true)
 
   const [formInfo, setFormInfo] = useState({
     length: 0,
@@ -62,11 +62,11 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
   const renderAction = () => {
     return (
       <>
-        <Col span={fold ? 16 / foldShowCount : !formInfo.restCount ? 8 : 16 / formInfo.restCount} style={{ textAlign: 'right' }}>
+        <Col span={open ? (!formInfo.restCount ? 8 : 16 / formInfo.restCount) : 16 / foldShowCount} style={{ textAlign: 'right' }}>
           <Space style={{ height: '100%' }}>
             <Form.Item style={{ marginBottom: 0 }}>
               <Button type="link" onClick={onFold}>
-                {fold ? '展开' : '折叠'}
+                {open ? '折叠' : '展开'}
               </Button>
             </Form.Item>
             <Form.Item style={{ marginBottom: 0 }}>
@@ -86,7 +86,7 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
   }
 
   const onFold = () => {
-    setFold(!fold)
+    setOpen(!open)
 
     const searchFormItemList = props.searchFormItemList as searchFormItemListProps
 
@@ -128,10 +128,10 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
           <Row gutter={12}>
             <>
               {renderSearchFormItem(props.searchFormItemList || [])}
-              {(fold || !!formInfo.restCount) && formInfo.length > 3 && renderAction()}
+              {(!open || !!formInfo.restCount) && formInfo.length > 3 && renderAction()}
             </>
           </Row>
-          {formInfo.length > 3 && !fold && !formInfo.restCount && (
+          {formInfo.length > 3 && open && !formInfo.restCount && (
             <Row justify="end" gutter={10}>
               {renderAction()}
             </Row>
