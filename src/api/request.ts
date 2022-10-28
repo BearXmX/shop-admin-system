@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 
-const baseURL = 'http://192.168.1.7:8081'
+const baseURL = '/gateway'
 
 const request = axios.create({
   baseURL,
@@ -28,7 +28,7 @@ request.interceptors.response.use(
       message.error(response.message)
       if (quitLoginStatus.includes(response.status as number)) {
         window.localStorage.removeItem('currentUser')
-        window.location.href = `/login`
+        window.location.href = `/#/login`
       }
     }
 

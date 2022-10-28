@@ -45,11 +45,11 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      "/": {
+      "/gateway": {
         target: 'http://192.168.1.7:8081',
         changeOrigin: true,
         pathRewrite: {
-          "^/": "/"
+          "^/gateway": ""
         }
       },
     }

@@ -29,7 +29,8 @@ const BasicLayout: React.FC<IProps> = props => {
 
   const getBreadcrumb = () => {
     const titleArr: string[] = []
-    window.location.pathname
+    window.location.hash
+      .split('#/')[1]
       .split('/')
       .filter(item => item)
       .forEach(item => {
@@ -61,7 +62,7 @@ const BasicLayout: React.FC<IProps> = props => {
   }
 
   useEffect(() => {
-    setHighLight(window.location.pathname)
+    setHighLight(window.location.hash)
   }, [])
 
   useEffect(() => {
