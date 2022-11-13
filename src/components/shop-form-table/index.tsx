@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { Button, Col, Form, Input, Row, Select, FormInstance, Space, Table } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 const Option = Select.Option
 
@@ -33,7 +34,7 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
 
   const closeStatusColCount = 2
 
-  const { dataSource = [], columns = [], total = 0, loading = false } = props.searchTableProps || {}
+  const { dataSource = [], columns = [], total = 0, loading = false, rowKey = 'id' } = props.searchTableProps || {}
 
   const searchFormItemList = props.searchFormItemList as searchFormItemListProps
 
@@ -129,6 +130,7 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
 
   const onReset = () => {
     formInstance.current?.resetFields()
+    setCurrent(1)
     props.onSearch({
       page: 1,
       pageSize,
@@ -138,6 +140,7 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
 
   const onSearch = () => {
     const formValue = formInstance.current?.getFieldsValue()
+    setCurrent(1)
     props.onSearch({
       page: 1,
       pageSize,
@@ -176,13 +179,13 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
       pageSize,
       ...(!!countLength && formInstance.current?.getFieldsValue()),
     })
-  }, [props.searchFormItemList])
+  }, [])
 
   return (
     <div className="shop-form-table" ref={divRef}>
       <>
         {Array.isArray(props.searchFormItemList) && !!props.searchFormItemList?.length && (
-          <Form layout="vertical" ref={formInstance} style={{ marginBottom: 20 }}>
+          <Form layout="vertical" ref={formInstance}>
             <Row gutter={12}>
               <>
                 {renderSearchFormItem(props.searchFormItemList || [])}
@@ -206,10 +209,31 @@ const ShopFormTable: React.FC<IShopFormTableProps> = props => {
           </Form>
         )}
       </>
+      <Row justify="end">
+        <Col>
+          {props.actionButton
+            ? props.actionButton.map(item => {
+                return (
+                  <Button
+                    key={item.text}
+                    style={{ marginLeft: 8 }}
+                    type={item.type}
+                    onClick={() => item.onClick()}
+                    icon={item.icon ? item.icon === 'plus' ? <PlusOutlined /> : null : null}
+                  >
+                    {item.text}
+                  </Button>
+                )
+              })
+            : null}
+        </Col>
+      </Row>
       <Table
+        style={{ marginTop: 20 }}
         dataSource={dataSource}
         columns={columns}
         loading={loading}
+        rowKey={rowKey}
         pagination={{
           total,
           current,

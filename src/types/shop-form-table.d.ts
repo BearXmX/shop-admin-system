@@ -17,6 +17,8 @@ declare type searchFormItemProps = {
 
 declare type searchFormItemListProps = searchFormItemProps[]
 
+declare type onSearchType<T extends { [key: string]: any } = {}> = (params: { page: number; pageSize: number } & T) => void
+
 declare interface IShopFormTableProps {
   searchFormItemList: searchFormItemListProps | false
   searchTableProps: {
@@ -24,6 +26,13 @@ declare interface IShopFormTableProps {
     columns: any[]
     total: number
     loading: boolean
+    rowKey?: string
   }
-  onSearch: (params: { page: number; pageSize: number }) => void
+  actionButton?: {
+    type: 'link' | 'primary' | 'default'
+    text: string
+    icon?: 'plus' | null
+    onClick: () => void
+  }[]
+  onSearch: onSearchType
 }

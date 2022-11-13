@@ -10,6 +10,8 @@ const request = axios.create({
 
 request.interceptors.request.use(
   config => {
+    const currentUser = window.localStorage.getItem('currentUser')!
+    config.headers!['Authorization'] = currentUser ? JSON.parse(currentUser).token : ''
     return config
   },
   error => {
